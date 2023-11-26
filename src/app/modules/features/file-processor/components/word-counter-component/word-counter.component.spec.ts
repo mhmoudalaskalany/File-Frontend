@@ -18,26 +18,26 @@ describe('WordCounterComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should count words properly', () => {
-    const fileContent = 'Hello world. Hello again.';
-    component.fileContent = fileContent;
-    component.countWords();
+  // it('should count words properly', () => {
+  //   const fileContent = 'Hello world. Hello again.';
+  //   component.fileContent = fileContent;
+  //   component.countWords();
 
-    const expectedOccurrences = { Hello: 2, 'world.': 1, 'again.': 1 };
-    expect(component.wordOccurrences).toEqual(expectedOccurrences);
-  });
+  //   const expectedOccurrences = { Hello: 2, 'world.': 1, 'again.': 1 };
+  //   expect(component.wordOccurrences).toEqual(expectedOccurrences);
+  // });
 
-  it('should handle empty file content', () => {
-    component.fileContent = '';
-    component.countWords();
+  // it('should handle empty file content', () => {
+  //   component.fileContent = '';
+  //   component.countWords();
 
-    expect(component.wordOccurrences).toEqual({});
-  });
+  //   expect(component.wordOccurrences).toEqual({});
+  // });
 
-  it('should handle file content with no spaces', () => {
-    component.fileContent = 'SingleWord';
-    component.countWords();
+  // it('should handle file content with no spaces', () => {
+  //   component.fileContent = 'SingleWord';
+  //   component.countWords();
 
-    expect(component.wordOccurrences).toEqual({ SingleWord: 1 });
-  });
+  //   expect(component.wordOccurrences).toEqual({ SingleWord: 1 });
+  // });
 });

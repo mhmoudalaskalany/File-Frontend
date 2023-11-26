@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Shell } from 'base/components/shell';
 import { AlertService } from 'core/services/alert/alert.service';
-import { TranslationService } from 'core/services/translation/translation.service';
 
 @Component({
   selector: 'app-file-processor',
@@ -15,9 +14,7 @@ export class FileProcessorComponent implements OnInit {
   get alertService(): AlertService {
     return Shell.Injector.get(AlertService);
   }
-  get localize(): TranslationService {
-    return Shell.Injector.get(TranslationService);
-  }
+
   constructor(public activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
@@ -33,7 +30,7 @@ export class FileProcessorComponent implements OnInit {
       };
       reader.readAsText(file);
     } else {
-      this.alertService.error(this.localize.translate.instant('VALIDATION.INVALID_FILE'));
+      this.alertService.error('invalid file format');
     }
   };
 }
