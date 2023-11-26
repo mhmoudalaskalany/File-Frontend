@@ -1,0 +1,11 @@
+<div class="page-wrapper">
+  <div class="mb-3">
+    <h1 class="m-0 font-24 regular text-primary">{{ pageTitle | translate }}</h1>
+  </div>
+
+  <mat-card class="px-4 pt-2 pb-4 m-0">
+    <input type="file" (change)="readFile($event)" />
+  </mat-card>
+
+  <app-word-counter [fileContent]="content"></app-word-counter>
+</div>

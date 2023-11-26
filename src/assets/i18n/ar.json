@@ -1,0 +1,18 @@
+{
+  "TITLE": "مدير الملفات",
+  "FILE-PROCESSOR": {
+    "PROCESS-FILE": "معالجة ملف",
+    "TITLE": "ملفات",
+    "FILE": "ملف"
+  },
+  "COMMON": {
+    "REPEATED_WORDS": "الكلمات المتكررة"
+  },
+  "ACTIONS": {
+    "TITLE": "الإجراءات",
+    "COUNT_WORDS": "احسب الكلمات"
+  },
+  "VALIDATION": {
+    "INVALID_FILE": "هذا الملف غير مدعوم"
+  }
+}

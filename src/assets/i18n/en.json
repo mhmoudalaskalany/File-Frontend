@@ -1,0 +1,18 @@
+{
+  "TITLE": "File Processor",
+  "FILE-PROCESSOR": {
+    "PROCESS-FILE": "Process File",
+    "FILE": "File",
+    "TITLE": "File Processor"
+  },
+  "COMMON": {
+    "REPEATED_WORDS" :"Repeated Words"
+  },
+  "ACTIONS": {
+    "TITLE": "Actions",
+    "COUNT_WORDS": "Count Words"
+  },
+  "VALIDATION": {
+    "INVALID_FILE": "Unsupported File Please Select TXT File"
+  }
+}
