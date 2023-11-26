@@ -10,6 +10,10 @@ export class WordCounterComponent {
   wordOccurrences: any = {};
 
   countWords(): void {
+    if (!this.fileContent) {
+      return;
+    }
+
     const words = this.fileContent.split(/\s+/);
     this.wordOccurrences = words.reduce((acc: any, word: string) => {
       acc[word] = (acc[word] || 0) + 1;

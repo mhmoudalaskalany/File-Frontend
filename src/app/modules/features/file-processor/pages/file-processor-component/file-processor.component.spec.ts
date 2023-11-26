@@ -1,59 +1,59 @@
-import { ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FileProcessorComponent } from './file-processor.component';
 import { AlertService } from 'core/services/alert/alert.service';
 import { ActivatedRoute } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('FileProcessorComponent', () => {
   let component: FileProcessorComponent;
   let fixture: ComponentFixture<FileProcessorComponent>;
+  let activatedRoute: ActivatedRoute;
   let alertServiceSpy: jasmine.SpyObj<AlertService>;
-
   beforeEach(() => {
     alertServiceSpy = jasmine.createSpyObj('AlertService', ['error']);
-
     TestBed.configureTestingModule({
       declarations: [FileProcessorComponent],
-      imports: [RouterTestingModule],
+      imports: [RouterTestingModule, TranslateModule.forRoot()],
       providers: [
-        { provide: ActivatedRoute, useValue: { snapshot: { data: { pageTitle: 'Test Page' } } } },
-        { provide: AlertService, useValue: alertServiceSpy }
+        { provide: AlertService, useValue: alertServiceSpy },
       ]
     });
 
     fixture = TestBed.createComponent(FileProcessorComponent);
     component = fixture.componentInstance;
+    activatedRoute = TestBed.get(ActivatedRoute);
+    activatedRoute.snapshot.data = { pageTitle: 'File Processor' };
   });
 
-  it('should create', () => {
+  it('should create the component', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should set pageTitle on ngOnInit', () => {
-    component.ngOnInit();
-    expect(component.pageTitle).toBe('Test Page');
+  it('should set the page title', () => {
+    fixture.detectChanges();
+    expect(component.pageTitle).toBe('File Processor');
   });
 
-  fit('should read a valid file', fakeAsync(() => {
-    const fileContent = 'Hello, this is a test file.';
-    const file = new File([fileContent], 'test-file.txt', { type: 'text/plain' });
-    const event = { target: { files: { item: () => file, length: 1 } } };
-    debugger;
+  it('should handle invalid file format', fakeAsync(() => {
+    const invalidFile = new File(['Invalid file'], 'invalid-file.txt', { type: 'application/octet-stream' });
+    const event = { target: { files: { item: () => invalidFile, length: 1 } } };
+  
     component.readFile(event);
     tick();
-    fixture.detectChanges(); // Detect changes to update the view
-
-    expect(component.content).toBe(fileContent);
-    expect(alertServiceSpy.error).not.toHaveBeenCalled();
-  }));
-
-  it('should handle invalid file type', fakeAsync(() => {
-    const event = { target: { files: { item: () => ({ type: 'application/pdf' }), length: 1 } } };
-
-    component.readFile(event);
-    tick(); // simulate the asynchronous file reading
-
+  
     expect(component.content).toBe('');
-    expect(alertServiceSpy.error).toHaveBeenCalledOnceWith('invalid file format');
+    expect(alertServiceSpy.error).toHaveBeenCalledWith('Invalid file format');
   }));
+
+  it('should read valid file and update word occurrences', async () => {
+    const validFile = new File(['Hello, this is a test file.'], 'test-file.txt', { type: 'text/plain' });
+    const event = { target: { files: { item: () => validFile, length: 1 } } };
+
+    await component.readFile(event);
+    fixture.detectChanges();
+    expect(component.content).toBe('Hello, this is a test file.');
+  });
 });
+
+

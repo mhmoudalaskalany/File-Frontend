@@ -2,23 +2,21 @@
   <mat-card class="px-4 pt-2 pb-4 mt-5">
     <div class="row">
       <div class="col-12">
+        <h4>File Contents</h4>
         <div>{{ fileContent }}</div>
       </div>
     </div>
+
     <div class="row mt-3">
       <div class="col-md-4">
-        <button mat-button class="main-btn main font-14 text-white px-4 mb-2" (click)="countWords()">
-          {{ 'ACTIONS.COUNT_WORDS' | translate }}
-        </button>
+        <button mat-button class="main-btn main font-14 text-white px-4 mb-2" (click)="countWords()">Count Words</button>
       </div>
     </div>
+
     <div>
-      <h3>
-        {{ 'COMMON.REPEATED_WORDS' | translate }}
-      </h3>
+      <h3>Repeated Words</h3>
     </div>
-    <div *ngFor="let item of wordOccurrences | keyvalue" class="mb-2">
-      <div class="text-primary">{{ item.key }}: {{ item.value }}</div>
-    </div>
+
+    <div *ngFor="let item of wordOccurrences | keyvalue" class="mb-2">{{ item.key }}: {{ item.value }}</div>
   </mat-card>
 </div>

@@ -14,30 +14,18 @@ describe('WordCounterComponent', () => {
     component = fixture.componentInstance;
   });
 
-  it('should create', () => {
+  it('should create the component', () => {
     expect(component).toBeTruthy();
   });
 
-  // it('should count words properly', () => {
-  //   const fileContent = 'Hello world. Hello again.';
-  //   component.fileContent = fileContent;
-  //   component.countWords();
-
-  //   const expectedOccurrences = { Hello: 2, 'world.': 1, 'again.': 1 };
-  //   expect(component.wordOccurrences).toEqual(expectedOccurrences);
-  // });
-
-  // it('should handle empty file content', () => {
-  //   component.fileContent = '';
-  //   component.countWords();
-
-  //   expect(component.wordOccurrences).toEqual({});
-  // });
-
-  // it('should handle file content with no spaces', () => {
-  //   component.fileContent = 'SingleWord';
-  //   component.countWords();
-
-  //   expect(component.wordOccurrences).toEqual({ SingleWord: 1 });
-  // });
+  it('should count words properly', () => {
+    component.fileContent = 'This is a test';
+    component.countWords();
+    expect(component.wordOccurrences).toEqual({
+      This: 1,
+      a: 1,
+      is: 1,
+      test: 1
+    });
+  });
 });

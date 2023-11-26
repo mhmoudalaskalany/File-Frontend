@@ -11,26 +11,29 @@ import { AlertService } from 'core/services/alert/alert.service';
 export class FileProcessorComponent implements OnInit {
   pageTitle = '';
   content: string = '';
-  get alertService(): AlertService {
-    return Shell.Injector.get(AlertService);
-  }
-
-  constructor(public activatedRoute: ActivatedRoute) {}
+  constructor(private activatedRoute: ActivatedRoute, private alertService: AlertService) {}
 
   ngOnInit(): void {
     this.pageTitle = this.activatedRoute.snapshot.data['pageTitle'];
   }
 
-  readFile = (event: any) => {
-    const file = event.target.files.item(0);
-    if (file && file.type === 'text/plain') {
+  readFile = (event: any): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const file = event.target.files.item(0);
+      if (!file || file.type !== 'text/plain') {
+        this.alertService.error('Invalid file format');
+        return;
+      }
+
       const reader = new FileReader();
-      reader.onload = e => {
-        this.content = e.target?.result as string;
+      reader.onload = () => {
+        this.content = reader.result as string;
+        resolve(this.content);
+      };
+      reader.onerror = () => {
+        reject(new Error('Failed to read file'));
       };
       reader.readAsText(file);
-    } else {
-      this.alertService.error('invalid file format');
-    }
+    });
   };
 }
