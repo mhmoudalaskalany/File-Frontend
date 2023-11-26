@@ -24,3 +24,10 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 ## Running unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+
+# Test Coverage
+-  testing are covering the main feature components which are file processor component and the child component word counter 
+
+![image](https://github.com/mhmoudalaskalany/File-Frontend/assets/45127300/f45c2a2d-d3a5-415b-85ce-dea5c3f981ec)
+
